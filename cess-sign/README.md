@@ -23,7 +23,7 @@ chmod +x build.sh
 [172,231,60,124,...,156,190,237,135]
 ```
 
-- widdows
+- windows
 ```
 cess-sign_win.exe "account mnemonic" "message"
 [172,231,60,124,...,156,190,237,135]
