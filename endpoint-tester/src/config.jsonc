@@ -1,0 +1,26 @@
+{
+  "keyring": {
+    // see: https://github.com/paritytech/ss58-registry/blob/main/ss58-registry.json
+    "type": "sr25519",
+    "ss58Format": 11330
+  },
+  "writeTxWait": "inBlock",
+  "endPoints": [
+    "ws://127.0.0.1:9944"
+    // "wss://testnet-rpc1.cess.cloud/ws/",
+    // "wss://rpc.polkadot.io"
+  ],
+  "connections": 2,
+  "txs": [
+    "api.query.timestamp.now",
+    {
+      "tx": "api.query.system.account",
+      "params": ["Alice"]
+    },
+    {
+      "tx": "api.tx.balances.transfer",
+      "params": ["Bob", 12345],
+      "sign": "Alice"
+    }
+  ]
+}
