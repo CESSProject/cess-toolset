@@ -1,0 +1,38 @@
+{
+  "imports": {
+    "std/": "https://deno.land/std@0.217.0/",
+    "polkadot-js/": "https://deno.land/x/polkadot@0.2.45/",
+    "async-mutex": "npm:async-mutex@0.4.1",
+    "chalk": "npm:chalk@5.3.0",
+  },
+  "tasks": {
+    "dev": "deno run --allow-net --allow-env --inspect-brk src/main.ts",
+    "start": "deno run --allow-net --allow-env --check src/main.ts",
+    "build": "deno compile --check --allow-net --allow-env --output substrate-rpc-tester src/main.ts",
+    "validate": "deno check src/main.ts && deno fmt --check && deno lint"
+  },
+  "compilerOptions": {
+    "strict": true,
+    "checkJs": true,
+    "types": [
+      "src/types.ts",
+    ]
+  },
+  "lint": {
+    "include": ["src/"],
+    "rules": {
+      "tags": ["recommended"],
+      "include": ["ban-untagged-todo"],
+    }
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false,
+    "proseWrap": "preserve",
+    "include": ["src/"],
+  },
+  "nodeModulesDir": true,
+}

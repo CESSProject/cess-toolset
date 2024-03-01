@@ -2,6 +2,7 @@
 Used to store a series of cess-related tool programs.
 
 # features
-| name    | describe                         |
+| Name    | Description                         |
 | ------- | -------------------------------- |
-| [cess-sign](https://github.com/CESSProject/cess-toolset/tree/main/cess-sign) | signature tool based on sr25519d implemented by go |
+| [**CESS Sign**](./cess-sign) | Signature tool based on sr25519d implemented by go |
+| [**Substrate RPC Tester**](./substrate-rpc-tester) | Tool to sending connecting to RPC endpoints and sending substrate transactions in batch and measure the performance. |

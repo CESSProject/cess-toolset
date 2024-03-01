@@ -1,0 +1,10 @@
+# cess-sign binary
+cess-sign
+cess-sign_linux
+cess-sign_win.exe
+
+.env
+**/node_modules
+
+# This is the built binary
+substrate-rpc-tester/substrate-rpc-tester
