@@ -1,8 +1,9 @@
 import { Keyring } from "polkadot-js/keyring/mod.ts";
+import chalk from "chalk";
 import type { KeyringPair } from "polkadot-js/keyring/types.ts";
 
 // Our own implementation
-import type { Tx, TxParam } from "./types.ts";
+import type { TimingRecord, Tx, TxParam } from "./types.ts";
 
 export const DEV_SEED_PHRASE =
   "bottom drive obey lake curtain smoke basket hold race lonely fit walk";
@@ -42,4 +43,36 @@ export function getSigner(keyring: Keyring, signerStr: string): KeyringPair {
     return keyring.addFromUri(`${DEV_SEED_PHRASE}//${signerStr}`);
   }
   return keyring.addFromUri(signerStr);
+}
+
+export function txDisplay(tx: Tx): string {
+  const em = "🔗";
+  if (typeof tx === "string") return `${em} ${tx}()`;
+
+  const paramsStr = tx.params ? tx.params.join(", ") : "";
+
+  if (!tx.signer) return `${em} ${tx.tx}(${paramsStr})`;
+  return `${em} ${tx.tx}(${paramsStr}) | ✍️  ${tx.signer}`;
+}
+
+export function displayTimingReport(timings: TimingRecord): void {
+  const log = console.log;
+  // const mainTitle = chalk.bold.bgBlack.yellowBright.underline;
+  const mainTitle = chalk.bold.yellowBright.inverse;
+  const catTitle = chalk.bgBlack.yellow;
+  const keyF = chalk.cyan;
+  const valF = chalk.whiteBright;
+
+  const displayStartEnd = (timings: TimingRecord, key: string) => {
+    log(`  ${keyF("time taken")}: ${valF(timings[key + "End"] - timings[key + "Start"])}`);
+  };
+
+  log();
+  log(mainTitle("--- Timing Report ---"));
+
+  log(catTitle("Connecting to all endpoints"));
+  displayStartEnd(timings, "allConn");
+
+  log(catTitle("Executing all transactions"));
+  displayStartEnd(timings, "allTxs");
 }

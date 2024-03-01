@@ -3,16 +3,8 @@ cess-sign
 cess-sign_linux
 cess-sign_win.exe
 
-# int-to-bytes yarn3
-int-to-bytes/.pnp.*
-int-to-bytes/.yarn/*
-!int-to-bytes/.yarn/patches
-!int-to-bytes/.yarn/plugins
-!int-to-bytes/.yarn/releases
-!int-to-bytes/.yarn/sdks
-!int-to-bytes/.yarn/versions
-
-int-to-bytes/node_modules
-
 .env
 **/node_modules
+
+# This is the built binary
+substrate-rpc-tester/substrate-rpc-tester
