@@ -20,5 +20,3 @@ export interface AppConfig {
   signers?: Record<string, string>;
   txs: Tx[];
 }
-
-export type TimingRecord = Record<string, number>;

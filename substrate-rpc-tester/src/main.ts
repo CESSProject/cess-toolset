@@ -7,7 +7,8 @@ async function main() {
   await substrateRpcTester.initialize();
   await substrateRpcTester.executeTxs();
 
-  substrateRpcTester.displayReport();
+  substrateRpcTester.displayTxResults();
+  substrateRpcTester.displayPerformance();
 }
 
 main()

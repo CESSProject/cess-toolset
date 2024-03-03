@@ -39,7 +39,7 @@ const Config: AppConfig = {
     {
       // Bob transfers back to Alice
       tx: "api.tx.balances.transfer",
-      params: ["Chris", 1000000000000],
+      params: ["Chris", 2000000000000],
       signer: "Biden",
     },
     {
@@ -47,7 +47,7 @@ const Config: AppConfig = {
       tx: "api.tx.proxy.addProxy",
       // (address, Staking type, BlockNumber)
       params: ["Biden", "Staking", 16],
-      signer: "Alice",
+      signer: "Chris",
     },
   ],
 };
