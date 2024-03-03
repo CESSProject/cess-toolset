@@ -1,25 +1,35 @@
-import { Keyring } from "polkadot-js/keyring/mod.ts";
+import { ApiPromise } from "polkadot-js/api/mod.ts";
 import chalk from "chalk";
 import type { KeyringPair } from "polkadot-js/keyring/types.ts";
 
 // Our own implementation
 import type { TimingRecord, Tx, TxParam } from "./types.ts";
 
-export const DEV_SEED_PHRASE =
-  "bottom drive obey lake curtain smoke basket hold race lonely fit walk";
-export const DEV_ACCTS = ["Alice", "Bob", "Charlie", "Dave", "Eve", "Fredie"];
+const API_PREFIX = "api";
 
-export function transformParams(keyring: Keyring, params: Array<TxParam>) {
+export function transformParams(params: Array<TxParam>, signers: Map<string, KeyringPair>) {
   return params.map((param) => {
     // if it is a dev account
-    if (typeof param === "string" && DEV_ACCTS.includes(param)) {
-      const acct = keyring.addFromUri(`${DEV_SEED_PHRASE}//${param}`);
-      return acct.address;
+    if (typeof param === "string" && signers.has(param)) {
+      return (signers.get(param) as KeyringPair).address;
     }
 
     // return its original form
     return param;
   });
+}
+
+export function getSigner(
+  signerStr: string | undefined,
+  signers: Map<string, KeyringPair>,
+): KeyringPair {
+  if (!signerStr || signerStr.length === 0) {
+    throw new Error(`writeOp has no signer specified.`);
+  }
+  if (!signers.has(signerStr)) {
+    throw new Error(`${signerStr} signer is not recognized`);
+  }
+  return signers.get(signerStr) as KeyringPair;
 }
 
 // This function works on polkadot-js api type. It is quite complicated with the dynamic type
@@ -38,11 +48,14 @@ export function isWriteOp(tx: Tx): boolean {
   return tx.tx.includes("tx.");
 }
 
-export function getSigner(keyring: Keyring, signerStr: string): KeyringPair {
-  if (DEV_ACCTS.includes(signerStr)) {
-    return keyring.addFromUri(`${DEV_SEED_PHRASE}//${signerStr}`);
-  }
-  return keyring.addFromUri(signerStr);
+// deno-lint-ignore no-explicit-any
+export function getTxCall(api: ApiPromise, txStr: string): any {
+  const segs = txStr.split(".");
+  return segs.reduce(
+    (txCall, seg, idx) => idx === 0 && seg === API_PREFIX ? txCall : txCall[seg],
+    // deno-lint-ignore no-explicit-any
+    api as Record<string, any>,
+  );
 }
 
 export function txDisplay(tx: Tx): string {

@@ -9,13 +9,15 @@ export interface TxObj {
 export type Tx = string | TxObj;
 
 export interface AppConfig {
+  endPoint: string;
   keyring: {
     type: "sr25519" | "ed25519" | "ecdsa";
     ss58Format: number;
   };
-  writeTxWait?: "none" | "inBlock" | "finalized";
-  endPoints: Array<string>;
+  writeTxWait?: "none" | "inblock" | "finalized";
   connections: number;
+  development?: boolean;
+  signers?: Record<string, string>;
   txs: Tx[];
 }
 
