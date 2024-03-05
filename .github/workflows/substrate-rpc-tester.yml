@@ -1,0 +1,28 @@
+name: Substrate RPC Tester
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validates:
+    strategy:
+      matrix:
+        deno: ["1.41"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: ${{ matrix.deno }}
+
+      - name: Validate application
+        run: |
+          cd substrate-rpc-tester
+          deno task validate
+
+      - name: Build application
+        run: |
+          cd substrate-rpc-tester
+          deno task build
