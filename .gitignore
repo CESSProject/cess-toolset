@@ -8,3 +8,6 @@ cess-sign_win.exe
 
 # This is the built binary
 substrate-rpc-tester/substrate-rpc-tester
+
+# build directories
+dist

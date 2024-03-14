@@ -4,7 +4,7 @@ import type { KeyringPair } from "polkadot-js/keyring/types.ts";
 import { Mutex, MutexInterface, withTimeout } from "async-mutex";
 import type { ISubmittableResult } from "polkadot-js/types/types/index.ts";
 
-import { AppConfig, Tx } from "./types.ts";
+import { AppConfig, AppOptions, Tx } from "./types.ts";
 import { UserNonces } from "./userNonces.ts";
 import * as utils from "./utils.ts";
 
@@ -14,6 +14,7 @@ const MUTEX_TIMEOUT = 5000;
 
 class SubstrateRpcTester {
   config: AppConfig;
+  opts: AppOptions;
   apis: ApiPromise[];
   keyring: Keyring;
   signers: Map<string, KeyringPair>;
@@ -21,9 +22,10 @@ class SubstrateRpcTester {
   userNonces: UserNonces;
   txResults: Map<number, string[]>;
 
-  constructor(_config: AppConfig) {
+  constructor(_config: AppConfig, opts: AppOptions) {
     this.config = _config;
     this.apis = [];
+    this.opts = opts;
     this.keyring = new Keyring(_config.keyring);
     this.signers = new Map();
     this.mutex = withTimeout(new Mutex(), MUTEX_TIMEOUT, new Error("mutex time out"));
@@ -80,6 +82,8 @@ class SubstrateRpcTester {
 
     await utils.measurePerformance(`${idx + 1}-executeTxs`, async () => {
       for (const tx of txs) {
+        this.opts.verbose && console.log(`executing ${idx + 1}:`, tx);
+
         if (typeof tx === "string") {
           txStr = tx;
           const txCall = utils.getTxCall(api, tx);
