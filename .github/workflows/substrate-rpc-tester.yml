@@ -25,4 +25,4 @@ jobs:
       - name: Build application
         run: |
           cd substrate-rpc-tester
-          deno task build
+          deno task compile
