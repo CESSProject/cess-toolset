@@ -20,3 +20,7 @@ export interface AppConfig {
   signers?: Record<string, string>;
   txs: Tx[];
 }
+
+export interface AppOptions {
+  verbose?: boolean;
+}

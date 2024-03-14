@@ -118,6 +118,6 @@ export function displayPerformance() {
 
   const measures = performance.getEntriesByType("measure");
   for (const measure of measures) {
-    display(catTitle(measure.name), `start: ${measure.startTime}, duration: ${measure.duration}`);
+    display(catTitle(measure.name), `start: ${measure.startTime}, duration: ${measure.duration}ms`);
   }
 }
