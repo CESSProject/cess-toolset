@@ -30,7 +30,7 @@ deno task start -h
 
 An example of the config is as follows:
 
-```json
+```jsonc
 {
   "endPoint": "ws://127.0.0.1:9944",
   "keyring": {
@@ -99,5 +99,3 @@ An example of the config is as follows:
 ![Primitive Report](./doc/asset/primitive-report.png)
 
 A primitive performance report is generated at the end on establishing the connections and executing all the transactions.
-
-**Todo**: future improvement.
