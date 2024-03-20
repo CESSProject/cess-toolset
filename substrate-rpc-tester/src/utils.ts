@@ -7,13 +7,14 @@ import type { Tx, TxParam } from "./types.ts";
 
 const API_PREFIX = "api";
 
-export function transformParams(params: Array<TxParam>, signers: Map<string, KeyringPair>) {
+export function transformTxParams(params: Array<TxParam>, signers: Map<string, KeyringPair>) {
   return params.map((param) => {
     // if it is a dev account
     if (typeof param === "string" && signers.has(param)) {
       return (signers.get(param) as KeyringPair).address;
+    } else if (typeof param === "number" && !Number.isSafeInteger(param)) {
+      return BigInt(param);
     }
-
     // return its original form
     return param;
   });
@@ -36,7 +37,7 @@ export function getSigner(
 //   fetched on-chain.
 //   ref: https://polkadot.js.org/docs/api/start/types.basics
 // deno-lint-ignore no-explicit-any
-export function transformResult(result: any): any {
+export function transformTxResult(result: any): any {
   if (typeof result === "object" && "toJSON" in result) {
     return result.toJSON();
   }

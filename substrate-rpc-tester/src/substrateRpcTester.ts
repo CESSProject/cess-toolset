@@ -93,7 +93,7 @@ class SubstrateRpcTester {
           txStr = tx.tx;
           const txCall = utils.getTxCall(api, txStr);
           const transformedParams = Array.isArray(tx.params)
-            ? utils.transformParams(tx.params, this.signers)
+            ? utils.transformTxParams(tx.params, this.signers)
             : [];
           lastResult = await txCall.call(txCall, ...transformedParams);
         } else {
@@ -101,7 +101,7 @@ class SubstrateRpcTester {
           txStr = tx.tx;
           const txCall = utils.getTxCall(api, txStr);
           const transformedParams = Array.isArray(tx.params)
-            ? utils.transformParams(tx.params, this.signers)
+            ? utils.transformTxParams(tx.params, this.signers)
             : [];
 
           const signer = utils.getSigner(tx.signer, this.signers);
@@ -156,7 +156,7 @@ class SubstrateRpcTester {
           }
         }
 
-        lastResult = utils.transformResult(lastResult);
+        lastResult = utils.transformTxResult(lastResult);
         this.appendExeLog(
           idx,
           `${utils.txDisplay(tx)}\n  L ${utils.stringify(lastResult, 4)}\n`,

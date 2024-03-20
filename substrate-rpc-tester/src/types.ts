@@ -1,4 +1,4 @@
-export type TxParam = string | number;
+export type TxParam = string | number | bigint;
 
 export interface TxObj {
   tx: string;

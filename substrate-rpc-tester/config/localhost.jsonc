@@ -4,7 +4,7 @@
     "type": "sr25519",
     "ss58Format": 11330,
   },
-  "writeTxWait": "none",
+  "writeTxWait": "inblock",
   "connections": 2,
   "development": true,
   "signers": {
@@ -19,7 +19,7 @@
     },
     {
       "tx": "api.tx.balances.transfer",
-      "params": ["Bob", 12345],
+      "params": ["Bob", 10000000000000],
       "signer": "Alice"
     },
     {
