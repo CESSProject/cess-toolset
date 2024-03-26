@@ -2,12 +2,17 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:ajv@^8.12.0": "npm:ajv@8.12.0",
       "npm:async-mutex@0.4.1": "npm:async-mutex@0.4.1",
       "npm:chalk@5.3.0": "npm:chalk@5.3.0",
       "npm:commander@12.0.0": "npm:commander@12.0.0"
     },
     "npm": {
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
+        "dependencies": {}
+      },
       "ajv@8.12.0": {
         "integrity": "sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==",
         "dependencies": {

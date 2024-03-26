@@ -7,6 +7,10 @@ import type { Tx, TxParam } from "./types.ts";
 
 const API_PREFIX = "api";
 
+export const DEV_SEED_PHRASE =
+  "bottom drive obey lake curtain smoke basket hold race lonely fit walk";
+export const DEV_ACCTS = ["Alice", "Bob", "Charlie", "Dave", "Eve", "Fredie"];
+
 export function transformTxParams(params: Array<TxParam>, signers: Map<string, KeyringPair>) {
   return params.map((param) => {
     // if it is a dev account

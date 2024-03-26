@@ -39,6 +39,7 @@ Deno.test("valid schema should pass", () => {
 Deno.test("invalid schemas should fail", async (t) => {
   await t.step("schema with no endPoint should fail", () => {
     const schema = structuredClone(validSchema);
+    // @ts-ignore: to allow deletion of the `endPoint` property
     delete schema.endPoint;
 
     assertFalse(validate(schema));
@@ -51,6 +52,7 @@ Deno.test("invalid schemas should fail", async (t) => {
   await t.step("schema with invalid keyring should fail", () => {
     const schema = structuredClone(validSchema);
     schema.keyring.type = "invalidVal";
+    // @ts-ignore: to allow deletion of the `keyring.ss58Format` property
     delete schema.keyring.ss58Format;
 
     assertFalse(validate(schema));
@@ -72,6 +74,7 @@ Deno.test("invalid schemas should fail", async (t) => {
 
   await t.step("schema with no connections should fail", () => {
     const schema = structuredClone(validSchema);
+    // @ts-ignore: to allow deletion of connections
     delete schema.connections;
 
     assertFalse(validate(schema));

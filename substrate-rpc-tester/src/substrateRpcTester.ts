@@ -8,9 +8,8 @@ import { AppConfig, AppOptions, Tx } from "./types.ts";
 import { UserNonces } from "./userNonces.ts";
 import * as utils from "./utils.ts";
 
-const DEV_SEED_PHRASE = "bottom drive obey lake curtain smoke basket hold race lonely fit walk";
-const DEV_ACCTS = ["Alice", "Bob", "Charlie", "Dave", "Eve", "Fredie"];
 const MUTEX_TIMEOUT = 5000;
+const { DEV_SEED_PHRASE, DEV_ACCTS } = utils;
 
 class SubstrateRpcTester {
   config: AppConfig;
