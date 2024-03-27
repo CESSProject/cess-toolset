@@ -1,17 +1,9 @@
 import { assertEquals, assertObjectMatch } from "std/assert/mod.ts";
-import { Keyring } from "polkadot-js/keyring/mod.ts";
 import { ApiPromise, WsProvider } from "polkadot-js/api/mod.ts";
-import type { KeyringOptions, KeyringPair } from "polkadot-js/keyring/types.ts";
+import type { KeyringPair } from "polkadot-js/keyring/types.ts";
 
 import * as utils from "../utils.ts";
-import { DEV_ACCTS, DEV_SEED_PHRASE } from "../utils.ts";
-
-const KEYRING_OPT = {
-  type: "sr25519",
-  ss58Format: 11330,
-} as KeyringOptions;
-
-const rpcEndPoint = Deno.env.get("RPC_ENDPOINT");
+import { rpcEndPoint, testUser } from "./helpers.ts";
 
 const TEST_USER_ID = "TEST_USER";
 const TX_PARAMS = {
@@ -22,11 +14,6 @@ const TX_PARAMS = {
 };
 
 Deno.test("Testing some utils functions", async (t) => {
-  // Setup the test user keyring
-  const keyring = new Keyring(KEYRING_OPT);
-  const testUserUri = `${DEV_SEED_PHRASE}//${DEV_ACCTS[0]}`;
-  const testUser = keyring.addFromUri(testUserUri);
-
   const signers = new Map<string, KeyringPair>();
   signers.set(TEST_USER_ID, testUser);
 

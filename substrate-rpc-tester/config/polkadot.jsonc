@@ -3,20 +3,20 @@
   "endPoint": "wss://polkadot.api.onfinality.io/public-ws",
   "keyring": {
     "type": "sr25519",
-    "ss58Format": 0,
+    "ss58Format": 0
   },
   "writeTxWait": "inblock",
   "connections": 3,
   "development": false,
   "signers": {
     "Brandon": "0x118a67f30b9d10b4efd11fd1c141909dd6f7c79f3586294905177b90bf6463fb",
-    "Chris": "bottom drive obey lake curtain smoke basket hold race lonely fit walk//Chris",
+    "Chris": "bottom drive obey lake curtain smoke basket hold race lonely fit walk//Chris"
   },
   "txs": [
     "api.query.timestamp.now",
     {
       "tx": "api.query.system.account",
-      "params": ["13QQQc31aGd7K9AW7vguZnqH3dL2aVezZH3aW6PKLbSGC9X3"],
+      "params": ["13QQQc31aGd7K9AW7vguZnqH3dL2aVezZH3aW6PKLbSGC9X3"]
     }
-  ],
+  ]
 }

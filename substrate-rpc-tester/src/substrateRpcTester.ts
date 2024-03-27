@@ -21,7 +21,7 @@ class SubstrateRpcTester {
   userNonces: UserNonces;
   txResults: Map<number, string[]>;
 
-  constructor(_config: AppConfig, opts: AppOptions) {
+  constructor(_config: AppConfig, opts: AppOptions = {}) {
     this.config = _config;
     this.apis = [];
     this.opts = opts;
