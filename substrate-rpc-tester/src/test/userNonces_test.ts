@@ -6,30 +6,26 @@ import { KeyringOptions } from "polkadot-js/keyring/types.ts";
 import { UserNonces } from "../userNonces.ts";
 import { DEV_ACCTS, DEV_SEED_PHRASE } from "../utils.ts";
 
-const TEST_CONN = {
-  endPoint: "ws://127.0.0.1:9944",
-  keyring: {
-    type: "sr25519",
-    ss58Format: 11330,
-  },
-};
+const KEYRING_OPT = {
+  type: "sr25519",
+  ss58Format: 11330,
+} as KeyringOptions;
+
+const rpcEndPoint = Deno.env.get("RPC_ENDPOINT");
 
 Deno.test({
   name: "Testing UserNonces caching",
+  ignore: !rpcEndPoint || rpcEndPoint.length === 0,
   async fn(t) {
     // Setup the API
-    const api = new ApiPromise({ provider: new WsProvider(TEST_CONN.endPoint) });
-    // const api = await ApiPromise.create({ provider: new WsProvider(TEST_CONN.endPoint) });
-    api.on("error", (err) => {
-      console.error("error handler");
-      console.error(`10: The testing endpoint ${TEST_CONN.endPoint} is not ready.`, err);
-    });
+    const api = new ApiPromise({ provider: new WsProvider(rpcEndPoint) });
+    api.on("error", (err) => console.error(`Error connecting to ${rpcEndPoint}:`, err));
     await api.isReady;
 
-    console.log("API connection successful.");
+    console.log(`Connected to: ${rpcEndPoint}`);
 
     // Setup the test user keyring
-    const keyring = new Keyring(TEST_CONN.keyring as KeyringOptions);
+    const keyring = new Keyring(KEYRING_OPT);
     const testUserUri = `${DEV_SEED_PHRASE}//${DEV_ACCTS[0]}`;
     const testUser = keyring.addFromUri(testUserUri);
 

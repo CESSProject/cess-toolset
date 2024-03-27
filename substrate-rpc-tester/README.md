@@ -94,6 +94,19 @@ An example of the config is as follows:
   - An object of "tx" and "params".
   - If it is a write transaction, you will need to include the signer ID.
 
+### Running Tests
+
+To run tests without connecing to a remote cess-node RPC connection
+
+```bash
+deno task test
+```
+
+To run tests with remote cess-node, let's specify a remote `RPC_ENDPOINT` env.
+```bash
+RPC_ENDPOINT="ws://127.0.0.1:9944" deno task test
+```
+
 ## Performance Report
 
 ![Primitive Report](./doc/asset/primitive-report.png)
