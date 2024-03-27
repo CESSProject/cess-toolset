@@ -1,6 +1,10 @@
 # Substrate RPC Tester
 
-This tool connects to a series of Substrate RPC endpoints and sending a script of transactions to these endpoints.
+This tool connects to a Substrate RPC endpoint and sends a script of transactions to the endpoint. It can make multiple connections to the endpoint and sending the same set of transactions. So this tool can be used as:
+
+1. An automation tool to run a series of transaction toward a Substrate network (when setting `connections` to 1).
+
+2. A load-testing tool to test a RPC endpoint when multiple connections are made and sending a series of transactions to the endpoint.
 
 To run the tester, you have to [install Deno](https://docs.deno.com/runtime/manual/getting_started/installation).
 
@@ -102,7 +106,8 @@ To run tests without connecing to a remote cess-node RPC connection
 deno task test
 ```
 
-To run tests with remote cess-node, let's specify a remote `RPC_ENDPOINT` env.
+To run tests with remote cess-node, after running a local [`cess-node`](https://github.com/cessProject/cess) locally, let's specify a remote `RPC_ENDPOINT` env.
+
 ```bash
 RPC_ENDPOINT="ws://127.0.0.1:9944" deno task test
 ```
