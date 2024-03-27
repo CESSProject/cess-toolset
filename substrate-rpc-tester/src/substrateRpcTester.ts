@@ -8,9 +8,8 @@ import { AppConfig, AppOptions, Tx } from "./types.ts";
 import { UserNonces } from "./userNonces.ts";
 import * as utils from "./utils.ts";
 
-const DEV_SEED_PHRASE = "bottom drive obey lake curtain smoke basket hold race lonely fit walk";
-const DEV_ACCTS = ["Alice", "Bob", "Charlie", "Dave", "Eve", "Fredie"];
 const MUTEX_TIMEOUT = 5000;
+const { DEV_SEED_PHRASE, DEV_ACCTS } = utils;
 
 class SubstrateRpcTester {
   config: AppConfig;
@@ -22,7 +21,7 @@ class SubstrateRpcTester {
   userNonces: UserNonces;
   txResults: Map<number, string[]>;
 
-  constructor(_config: AppConfig, opts: AppOptions) {
+  constructor(_config: AppConfig, opts: AppOptions = {}) {
     this.config = _config;
     this.apis = [];
     this.opts = opts;
@@ -93,7 +92,7 @@ class SubstrateRpcTester {
           txStr = tx.tx;
           const txCall = utils.getTxCall(api, txStr);
           const transformedParams = Array.isArray(tx.params)
-            ? utils.transformParams(tx.params, this.signers)
+            ? utils.transformTxParams(tx.params, this.signers)
             : [];
           lastResult = await txCall.call(txCall, ...transformedParams);
         } else {
@@ -101,7 +100,7 @@ class SubstrateRpcTester {
           txStr = tx.tx;
           const txCall = utils.getTxCall(api, txStr);
           const transformedParams = Array.isArray(tx.params)
-            ? utils.transformParams(tx.params, this.signers)
+            ? utils.transformTxParams(tx.params, this.signers)
             : [];
 
           const signer = utils.getSigner(tx.signer, this.signers);
@@ -156,7 +155,7 @@ class SubstrateRpcTester {
           }
         }
 
-        lastResult = utils.transformResult(lastResult);
+        lastResult = utils.transformTxResult(lastResult);
         this.appendExeLog(
           idx,
           `${utils.txDisplay(tx)}\n  L ${utils.stringify(lastResult, 4)}\n`,
