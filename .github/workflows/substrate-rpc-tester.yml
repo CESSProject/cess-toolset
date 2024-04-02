@@ -11,18 +11,24 @@ jobs:
       matrix:
         deno: ["1.41"]
     runs-on: ubuntu-latest
+
+    container:
+      image: docker pull cesslab/cess-chain:testnet
+      ports:
+        - 9944
+
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
         with:
           deno-version: ${{ matrix.deno }}
 
+      # - name: Build application
+      #   run: |
+      #     cd substrate-rpc-tester
+      #     deno task compile
+
       - name: Validate application
         run: |
           cd substrate-rpc-tester
-          deno task validate
-
-      - name: Build application
-        run: |
-          cd substrate-rpc-tester
-          deno task compile
+          deno task validate:remote
