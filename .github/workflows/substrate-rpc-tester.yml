@@ -16,7 +16,7 @@ jobs:
         image: cesslab/cess-chain:testnet
         ports:
           - 9944
-        options: "--entrypoint ./cess-node -dev"
+        options: "--entrypoint './cess-node --dev'"
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
