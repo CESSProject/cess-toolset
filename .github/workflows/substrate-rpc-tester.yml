@@ -11,12 +11,12 @@ jobs:
       matrix:
         deno: ["1.41"]
     runs-on: ubuntu-latest
-
-    container:
-      image: cesslab/cess-chain:testnet
-      ports:
-        - 9944
-
+    services:
+      cess-chain:
+        image: cesslab/cess-chain:testnet
+        ports:
+          - 9944
+        options: "--entrypoint ./cess-node -dev"
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
