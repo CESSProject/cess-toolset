@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: docker pull cesslab/cess-chain:testnet
+      image: cesslab/cess-chain:testnet
       ports:
         - 9944
 
