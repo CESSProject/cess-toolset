@@ -11,18 +11,23 @@ jobs:
       matrix:
         deno: ["1.41"]
     runs-on: ubuntu-latest
+    services:
+      cess-chain:
+        image: hkwtf/cess-devnode:testnet
+        ports:
+          - 9944:9944
     steps:
       - uses: actions/checkout@v3
       - uses: denoland/setup-deno@v1
         with:
           deno-version: ${{ matrix.deno }}
 
-      - name: Validate application
-        run: |
-          cd substrate-rpc-tester
-          deno task validate
-
       - name: Build application
         run: |
           cd substrate-rpc-tester
           deno task compile
+
+      - name: Validate and Run Tests
+        run: |
+          cd substrate-rpc-tester
+          RPC_ENDPOINT="ws://127.0.0.1:9944" deno task validate

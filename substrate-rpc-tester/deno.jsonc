@@ -12,9 +12,9 @@
     "start": "deno run --allow-read --allow-net --allow-env --check src/main.ts",
     "compile": "deno compile --check --allow-read --allow-net --allow-env --output dist/substrate-rpc-tester src/main.ts",
     "test": "deno test --allow-read --allow-net --allow-env --fail-fast",
-    "test:remote": "RPC_ENDPOINT=\"ws://127.0.0.1:9944\" deno task test",
-    "validate": "deno check src/main.ts && deno fmt --check && deno lint && deno task test",
-    "validate:remote": "RPC_ENDPOINT=\"ws://127.0.0.1:9944\" deno task validate"
+    "test:localhost-node": "RPC_ENDPOINT=\"ws://127.0.0.1:9944\" deno task test",
+    "validate": "deno check src/**/*.ts && deno fmt --check && deno lint && deno task test",
+    "validate:localhost-node": "RPC_ENDPOINT=\"ws://127.0.0.1:9944\" deno task validate"
   },
   "compilerOptions": {
     "strict": true,
